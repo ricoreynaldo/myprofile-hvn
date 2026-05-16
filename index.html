@@ -12,9 +12,8 @@
   <link rel="icon" href="img/rico.jpeg" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-
   <!-- MUSIC PLAYER -->
   <audio id="bgMusic" loop preload="auto">
     <source src="asset/bgm.mp3" type="audio/mpeg" />
@@ -191,23 +190,23 @@
   </div>
 
   <div class="review-form-box">
-    <h3>💬 Leave a Review</h3>
+    <h3>Leave a Review</h3>
 
-    <form class="review-form" action="submit_review.php" method="POST">
+    <form class="review-form" id="reviewForm">
       <div class="form-grid">
         <div class="form-group">
           <label>Nama Client <span>*</span></label>
-          <input type="text" name="name" placeholder="Masukkan nama Anda" required>
+          <input type="text" id="reviewName" placeholder="Masukkan nama Anda" required>
         </div>
 
         <div class="form-group">
           <label>Nama Project <span>*</span></label>
-          <input type="text" name="project" placeholder="Contoh: Website Company Profile" required>
+          <input type="text" id="reviewProject" placeholder="Contoh: Website Company Profile" required>
         </div>
 
         <div class="form-group">
           <label>Pilih Rating <span>*</span></label>
-          <select name="rating" required>
+          <select id="reviewRating" required>
             <option value="5">★★★★★</option>
             <option value="4">★★★★</option>
             <option value="3">★★★</option>
@@ -219,7 +218,7 @@
 
       <div class="form-group">
         <label>Tulis review client <span>*</span></label>
-        <textarea name="message" placeholder="Tulis pengalaman Anda bekerja dengan saya..." required></textarea>
+        <textarea id="reviewMessage" placeholder="Tulis pengalaman Anda bekerja dengan saya..." required></textarea>
       </div>
 
       <button type="submit" class="submit-review">Submit Review</button>
@@ -227,56 +226,10 @@
   </div>
 
   <h3 class="review-subtitle">What Clients Say</h3>
-
-  <div class="review-grid">
-    <?php
-      include "db.php";
-
-      $reviews = mysqli_query($conn, "SELECT * FROM client_reviews ORDER BY id DESC");
-
-      if (mysqli_num_rows($reviews) > 0) {
-        while ($row = mysqli_fetch_assoc($reviews)) {
-    ?>
-      <div class="review-card">
-        <div class="stars">
-          <?php
-            for ($i = 1; $i <= 5; $i++) {
-              echo $i <= $row["rating"] ? "★" : "☆";
-            }
-          ?>
-        </div>
-
-        <p class="review-message">
-          "<?= htmlspecialchars($row["message"]); ?>"
-        </p>
-
-        <div class="review-user">
-          <div class="avatar">
-            <?= strtoupper(substr($row["name"], 0, 1)); ?>
-          </div>
-
-          <div>
-            <h4><?= htmlspecialchars($row["name"]); ?></h4>
-            <span><?= htmlspecialchars($row["project"]); ?></span>
-          </div>
-        </div>
-      </div>
-    <?php
-        }
-      } else {
-        echo "<p class='empty-review'>Belum ada review client.</p>";
-      }
-    ?>
+  <div class="review-grid" id="reviewList">
+    <p class="empty-review">Loading reviews...</p>
   </div>
 </section>
-
-  <section id="cv" class="section reveal">
-    <h2>CV Preview</h2>
-
-    <div class="cv-box">
-      <iframe src="asset/Rico.pdf"></iframe>
-    </div>
-  </section>
 
   <section id="contact" class="section contact reveal">
     <h2>Contact Me</h2>
@@ -471,6 +424,118 @@ function closeModal() {
   }
 }
 </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://szstskjxclnhfkunkcdu.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_i-T-19Xx45gPph355bArZA_FgytMCUh";
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderStars(rating) {
+      let stars = "";
+      for (let i = 1; i <= 5; i++) {
+        stars += i <= rating ? "★" : "☆";
+      }
+      return stars;
+    }
+
+    async function loadReviews() {
+      const reviewList = document.getElementById("reviewList");
+      if (!reviewList) return;
+
+      const { data, error } = await supabaseClient
+        .from("client_reviews")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (error) {
+        console.error(error);
+        reviewList.innerHTML = `<p class="empty-review">Gagal memuat review.</p>`;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        reviewList.innerHTML = `<p class="empty-review">Belum ada review client.</p>`;
+        return;
+      }
+
+      reviewList.innerHTML = data.map(row => `
+        <div class="review-card">
+          <div class="stars">${renderStars(Number(row.rating))}</div>
+
+          <p class="review-message">
+            "${escapeHtml(row.message)}"
+          </p>
+
+          <div class="review-user">
+            <div class="avatar">
+              ${escapeHtml(row.name.charAt(0).toUpperCase())}
+            </div>
+
+            <div>
+              <h4>${escapeHtml(row.name)}</h4>
+              <span>${escapeHtml(row.project)}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const reviewForm = document.getElementById("reviewForm");
+
+      if (reviewForm) {
+        reviewForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("reviewName").value.trim();
+          const project = document.getElementById("reviewProject").value.trim();
+          const rating = Number(document.getElementById("reviewRating").value);
+          const message = document.getElementById("reviewMessage").value.trim();
+
+          if (!name || !project || !message || rating < 1 || rating > 5) {
+            alert("Data review belum lengkap.");
+            return;
+          }
+
+          const { error } = await supabaseClient
+            .from("client_reviews")
+            .insert([
+              {
+                name,
+                project,
+                rating,
+                message
+              }
+            ]);
+
+          if (error) {
+            console.error(error);
+            alert("Review gagal dikirim.");
+            return;
+          }
+
+          reviewForm.reset();
+          alert("Review berhasil dikirim.");
+          loadReviews();
+        });
+      }
+
+      loadReviews();
+    });
+  </script>
 
 </body>
 </html>
