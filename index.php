@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Rico Reynaldo | Portfolio</title>
+  <meta name="description" content="Portfolio Rico Reynaldo, Data Analyst, Software Engineer, dan Frontend Developer." />
+  <meta name="keywords" content="portfolio, frontend developer, data analyst, software engineer, web developer" />
+  <meta name="author" content="Rico Reynaldo" />
+
+  <link rel="icon" href="img/rico.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <!-- MUSIC PLAYER -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="asset/bgm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle music">
+    <span class="music-icon">♪</span>
+    <span class="music-text">OFF</span>
+  </button>
+
+  <div class="loader" id="loader">
+    <h1>HEAVEN</h1>
+    <p><i>Wait a sec..</i></p>
+  </div>
+
+  <header class="navbar">
+    <div class="logo">HEAVEN</div>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav id="navMenu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content reveal">
+      <p class="tag">Hello, I am</p>
+      <h1>Rico Reynaldo</h1>
+
+      <p class="role">
+        Data Analyst • Software Engineer • Frontend Developer
+      </p>
+
+      <p class="desc">
+        I create modern websites, clean interfaces, interactive dashboards,
+        and responsive digital products with a cinematic visual style.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="asset/Rico.pdf" target="_blank" class="btn play">▶ View CV</a>
+        <a href="https://linkedin.com/in/ricoreynaldo" target="_blank" class="btn info">LinkedIn</a>
+        <a href="https://github.com/ricoreynaldo" target="_blank" class="btn dark">GitHub</a>
+        <a href="https://instagram.com/lilreynal" target="_blank" class="btn instagram">Instagram</a>
+      </div>
+    </div>
+
+    <div class="profile-card reveal">
+      <img src="img/rico.jpeg" alt="Rico Reynaldo" />
+      <div class="card-content">
+        <h3>Rico Reynaldo</h3>
+        <p>Software Engineer</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section reveal">
+    <h2>About Me</h2>
+
+    <div class="about-box">
+      <p>
+        I am a developer focused on building modern, responsive, and
+        user-centered digital products. My work combines interface design,
+        efficient code, clean structure, and interactive user experience.
+      </p>
+    </div>
+
+    <div class="skills">
+      <span>Data</span>
+      <span>AI</span>
+      <span>React</span>
+      <span>Javascript</span>
+      <span>Laravel</span>
+      <span>Python</span>
+      <span>UI/UX</span>
+      <span>Design</span>
+      <span>Figma</span>
+      <span>Canva</span>
+      <span>Microsoft Office</span>
+      
+    </div>
+  </section>
+
+  <section id="services" class="section reveal">
+    <h2>Services</h2>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Website Development</h3>
+        <p>Responsive portfolio, landing page, company profile, and custom website.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>UI/UX Design</h3>
+        <p>Clean interface design with strong layout, visual hierarchy, and usability.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Data Analyst/Entri</h3>
+        <p>Interactive admin dashboard for analytics, reports, and data visualization.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Visual Design</h3>
+        <p>Convert design into clean HTML, CSS, JavaScript, or React components.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section reveal">
+    <h2>Featured Projects</h2>
+
+    <div class="filter-buttons">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="web">Website</button>
+      <button class="filter" data-filter="app">App</button>
+      <button class="filter" data-filter="design">Design</button>
+    </div>
+
+    <div class="project-row">
+
+      <div class="project-card" data-category="web">
+        <img src="img/project1.png" alt="Undangan Digital" />
+        <h3>Digital Invitation</h3>
+        <p>Yuwan and Azmi's digital invitation.</p>
+        <div class="project-actions">
+          <a href="https://yuwanazmi.my.id" target="_blank">Live Demo</a>
+          <button onclick="openModal('Digital Invitation', 'Website undangan digital modern dengan tampilan elegan, responsive, dan mudah diakses melalui browser.')">Detail</button>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="app">
+        <img src="img/project2.png" alt="Portfolio Website" />
+        <h3>Object Detection App</h3>
+        <p>Real-Time Moving Object Detection Application Using the YOLOv8 Algorithm </p>
+        <div class="project-actions">
+          <a href="https://github.com/ricoreynaldo/cctvmonitor-yolov8.git" target="_blank">View</a>
+          <button onclick="openModal('Object Detection', 'Real-time object detection application using YOLOv8 and PyQt5 for CCTV monitoring and human detection.')">Detail</button>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="app">
+        <img src="img/project3.jpg" alt="Reminder App" />
+        <h3>Reminder App</h3>
+        <p>Mobile health reminder application concept.</p>
+        <div class="project-actions">
+          <a href="#" target="_blank">Live Demo</a>
+          <button onclick="openModal('Reminder App', 'Aplikasi reminder kesehatan dengan fitur notifikasi, jadwal, dan tampilan mobile-friendly.')">Detail</button>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="dashboard">
+        <img src="img/project4.jpg" alt="Dashboard UI" />
+        <h3>Dashboard UI</h3>
+        <p>Interactive analytics dashboard for reporting.</p>
+        <div class="project-actions">
+          <a href="#" target="_blank">Live Demo</a>
+          <button onclick="openModal('Dashboard UI', 'Dashboard analytics dengan card statistik, visualisasi data, dan layout admin modern.')">Detail</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="reviews" class="section reviews-section reveal">
+  <div class="section-head">
+    <h2>Client Reviews</h2>
+    <p>What my clients say about working with me.</p>
+  </div>
+
+  <div class="review-form-box">
+    <h3>💬 Leave a Review</h3>
+
+    <form class="review-form" action="submit_review.php" method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nama Client <span>*</span></label>
+          <input type="text" name="name" placeholder="Masukkan nama Anda" required>
+        </div>
+
+        <div class="form-group">
+          <label>Nama Project <span>*</span></label>
+          <input type="text" name="project" placeholder="Contoh: Website Company Profile" required>
+        </div>
+
+        <div class="form-group">
+          <label>Pilih Rating <span>*</span></label>
+          <select name="rating" required>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Tulis review client <span>*</span></label>
+        <textarea name="message" placeholder="Tulis pengalaman Anda bekerja dengan saya..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-review">Submit Review</button>
+    </form>
+  </div>
+
+  <h3 class="review-subtitle">What Clients Say</h3>
+
+  <div class="review-grid">
+    <?php
+      include "db.php";
+
+      $reviews = mysqli_query($conn, "SELECT * FROM client_reviews ORDER BY id DESC");
+
+      if (mysqli_num_rows($reviews) > 0) {
+        while ($row = mysqli_fetch_assoc($reviews)) {
+    ?>
+      <div class="review-card">
+        <div class="stars">
+          <?php
+            for ($i = 1; $i <= 5; $i++) {
+              echo $i <= $row["rating"] ? "★" : "☆";
+            }
+          ?>
+        </div>
+
+        <p class="review-message">
+          "<?= htmlspecialchars($row["message"]); ?>"
+        </p>
+
+        <div class="review-user">
+          <div class="avatar">
+            <?= strtoupper(substr($row["name"], 0, 1)); ?>
+          </div>
+
+          <div>
+            <h4><?= htmlspecialchars($row["name"]); ?></h4>
+            <span><?= htmlspecialchars($row["project"]); ?></span>
+          </div>
+        </div>
+      </div>
+    <?php
+        }
+      } else {
+        echo "<p class='empty-review'>Belum ada review client.</p>";
+      }
+    ?>
+  </div>
+</section>
+
+  <section id="cv" class="section reveal">
+    <h2>CV Preview</h2>
+
+    <div class="cv-box">
+      <iframe src="asset/Rico.pdf"></iframe>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact reveal">
+    <h2>Contact Me</h2>
+    <p>Send a message or connect through my platforms.</p>
+
+    <form class="contact-form" action="mailto:ricoreynaldo02@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Email</button>
+    </form>
+
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/ricoreynaldo" target="_blank">LinkedIn</a>
+      <a href="https://github.com/ricoreynaldo" target="_blank">GitHub</a>
+      <a href="https://instagram.com/lilreynal" target="_blank">Instagram</a>
+      <a href="mailto:ricoreynaldo02@gmail.com">Email</a>
+      <a href="asset/Rico.pdf" target="_blank">CV</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Rico Reynaldo. All Rights Reserved.</p>
+  </footer>
+
+  <button id="backTop">↑</button>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()">×</button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.getElementById("loader");
+  const menuBtn = document.getElementById("menuBtn");
+  const navMenu = document.getElementById("navMenu");
+  const backTop = document.getElementById("backTop");
+  const filters = document.querySelectorAll(".filter");
+  const projects = document.querySelectorAll(".project-card");
+  const reveals = document.querySelectorAll(".reveal");
+  const bgMusic = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+
+  const setMusicState = isPlaying => {
+    if (!musicToggle) return;
+    musicToggle.classList.toggle("playing", isPlaying);
+    const text = musicToggle.querySelector(".music-text");
+    if (text) text.innerText = isPlaying ? "ON" : "OFF";
+  };
+
+  if (bgMusic && musicToggle) {
+    bgMusic.volume = 0.45;
+
+    musicToggle.addEventListener("click", async () => {
+      if (bgMusic.paused) {
+        try {
+          await bgMusic.play();
+          setMusicState(true);
+        } catch (error) {
+          setMusicState(false);
+        }
+      } else {
+        bgMusic.pause();
+        setMusicState(false);
+      }
+    });
+  }
+
+
+  if (loader) {
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loader.classList.add("hide");
+      }, 650);
+    });
+
+    setTimeout(() => {
+      loader.classList.add("hide");
+    }, 1800);
+  }
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll("#navMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+    });
+  }
+
+  const showReveal = () => {
+    reveals.forEach(item => {
+      const top = item.getBoundingClientRect().top;
+      if (top < window.innerHeight - 90) {
+        item.classList.add("show");
+      }
+    });
+  };
+
+  showReveal();
+  window.addEventListener("scroll", showReveal);
+
+  filters.forEach(button => {
+    button.addEventListener("click", () => {
+      filters.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const category = button.dataset.filter;
+
+      projects.forEach(project => {
+        const match = category === "all" || project.dataset.category === category;
+        project.style.display = match ? "flex" : "none";
+      });
+    });
+  });
+
+  if (backTop) {
+    window.addEventListener("scroll", () => {
+      backTop.classList.toggle("show", window.scrollY > 400);
+    });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  projects.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateY = ((x / rect.width) - 0.5) * 10;
+      const rotateX = ((y / rect.height) - 0.5) * -10;
+
+      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+
+  document.querySelectorAll(".btn, .service-card, .project-card, .review-card, .contact-links a").forEach(el => {
+    el.addEventListener("mousemove", e => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty("--x", `${e.clientX - rect.left}px`);
+      el.style.setProperty("--y", `${e.clientY - rect.top}px`);
+    });
+  });
+
+  const cursor = document.createElement("div");
+  cursor.className = "custom-cursor";
+  document.body.appendChild(cursor);
+
+  document.addEventListener("mousemove", e => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  });
+
+  document.querySelectorAll("a, button, .project-card, .service-card, .review-card").forEach(el => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("active"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
+  });
+});
+
+function openModal(title, desc) {
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const modal = document.getElementById("projectModal");
+
+  if (modalTitle && modalDesc && modal) {
+    modalTitle.innerText = title;
+    modalDesc.innerText = desc;
+    modal.classList.add("show");
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    modal.classList.remove("show");
+  }
+}
+</script>
+
+</body>
+</html>
