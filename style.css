@@ -1024,4 +1024,26 @@ footer {
     width: 54px;
     height: 54px;
   }
+
+  html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section {
+  width: 100%;
+  overflow: hidden;
+}
+
 }
